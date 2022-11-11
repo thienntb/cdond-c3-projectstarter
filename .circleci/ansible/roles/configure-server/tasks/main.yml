@@ -1,0 +1,14 @@
+- name: upgrade and  update packages
+  apt: 
+   update_cache: yes
+
+- name: install node package
+  apt: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - nodejs
+      - npm
+
+- name: install pm2
+  command: npm install pm2 -g
