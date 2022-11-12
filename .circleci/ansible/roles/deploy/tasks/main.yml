@@ -17,15 +17,12 @@
 - name: extract artifact to src
   unarchive:
     src: /tmp/artifact.tar.gz
-    dest: ~/src
+    dest: .
     remote_src: yes
 
-- name: install node dependencies
-  command: npm i 
-  args:
-    chdir: ~/src
-
 - name: ans start app
-  command: pm2 start main.js
-  args:
-    chdir: ~/src/dist
+  become: true
+  shell: |
+    npm install
+    pm2 stop default
+    pm2 start npm -- start
