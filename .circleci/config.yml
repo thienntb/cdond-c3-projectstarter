@@ -26,8 +26,8 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = $(curl --insecure  https://kvdb.io/MgJGRzBhxFTzXx8U2s6M88/migration_<< parameters.workflow_id >>)
-            if(( $SUCCESS==1 )); 
+            SUCCESS=$(curl --insecure  https://kvdb.io/MgJGRzBhxFTzXx8U2s6M88/migration_<< parameters.workflow_id >>)
+            if (( $SUCCESS == 1 ));
             then
                 cd ~/project/backend
                 npm install
@@ -231,7 +231,7 @@ jobs:
             yum install -y python3
             # Add NodeSource yum repository
             curl -sL https://rpm.nodesource.com/setup_13.x | sudo bash -
-            sudo yum install nodejs
+            yum install -y nodejs
             pip3 install ansible
       - run:
           name: Get backend url
