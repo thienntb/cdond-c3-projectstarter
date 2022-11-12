@@ -219,24 +219,17 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli:2.8.11
+      - image: python:3.9.0-alpine
     steps:
       # Checkout code from git
       - checkout
-      - attach_workspace:
-          at: ~/
       - restore_cache:
           keys: [frontend-build]
       - run:
           name: Install dependencies
           command: |
-            yum update -y
-            yum install -y tar gzip
-            yum install -y python3
-            # Add NodeSource yum repository
-            curl -sL https://rpm.nodesource.com/setup_13.x | bash -
-            yum install -y nodejs
-            pip3 install ansible
+            pip3 install awscli
+            apk add --update tar gzip curl nodejs npm zip
       - run:
           name: Get backend url
           command: |
