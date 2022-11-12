@@ -230,7 +230,7 @@ jobs:
             yum install -y tar gzip
             yum install -y python3
             # Add NodeSource yum repository
-            curl -sL https://rpm.nodesource.com/setup_13.x | sudo bash -
+            curl -sL https://rpm.nodesource.com/setup_13.x | bash -
             yum install -y nodejs
             pip3 install ansible
       - run:
